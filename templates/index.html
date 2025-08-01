@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Not done planes{% endblock title %}
+{% block content %}
+
+<main style="background-color: #f0fbff;">
+    <!-- Section Header -->
+    <div class="container py-5">
+        <div class="row d-flex justify-content-between align-items-center mb-4">
+            <div class="col-md-4">
+                <div class="section-tittle">
+                    <h3 style="color: #333;">⏳ Time Until Done</h3>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="properties__button">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" style="color: #000;" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab">All</a>
+                            {% for time in time_until_done %}
+                            <a class="nav-item nav-link" style="color: #000;" id="nav-{{ time.name }}-tab" data-toggle="tab" href="#nav-{{ time.name }}" role="tab">{{ time.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content Start -->
+        <div class="tab-content" id="nav-tabContent">
+
+            <!-- All Plans -->
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel">
+                {% for i in plan %}
+                {% if request.user == i.author%}
+                <a href="{{ i.get_absolute_url }}">
+                    <div class="job-detail-card p-4 mb-4 shadow rounded bg-white">
+                        <h4 class="fw-bold text-primary mb-2">📌 {{ i.title }}</h4>
+                        <p class="text-secondary mb-3">📝 {{ i.body }}</p>
+                    </div>
+                </a>
+                {% endif%}
+                {% empty %}
+                <p class="text-muted">📭 Hozircha reja mavjud emas.</p>
+                {% endfor %}
+            </div>
+
+            <!-- Filtered by Time -->
+            {% for time in time_until_done %}
+            <div class="tab-pane fade" id="nav-{{ time.name }}" role="tabpanel">
+                <div class="row">
+                    {% for i in plan %}
+                    {% if request.user == i.author%}
+                        {% if i.time_until_done.id == time.id %}
+                            <div class="job-detail-card p-4 mb-4 shadow rounded bg-white">
+                                <a href="{{ i.get_absolute_url }}">
+                                    <h4 class="fw-bold text-primary mb-2">📌 {{ i.title }}</h4>
+                                    <p class="text-secondary mb-3">📝 {{ i.body }}</p>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endif%}
+                    {% empty %}
+                    <p class="text-muted">📭 {{ time.name }} vaqt bo‘yicha hech qanday reja topilmadi.</p>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Tab Content End -->
+    </div>
+</main>
+{% endblock content %}

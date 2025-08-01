@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Chiqildi{% endblock title %}
+{% block content %}
+<div class="container mt-5 p-4 rounded-4 shadow-lg text-center" style="background-color: #f8f9fa;">
+    <h2 class="text-success mb-3">👋 Tizimdan chiqdingiz</h2>
+    <p class="text-muted">Qayta kirish uchun quyidagi tugmani bosing:</p>
+    <a href="{% url 'login' %}" class="btn btn-success mt-3">🔐 Login</a>
+</div>
+{% endblock content %}

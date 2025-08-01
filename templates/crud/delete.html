@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Yangilikni o‘chirish{% endblock title %}
+{% block content %}
+<div class="container mt-5 p-4 rounded text-center" style="background-color: #eaf6ff; color: #1a1a2e; max-width: 600px;">
+    <h2 style="color: #dc3545;">🗑️ Yangilikni o‘chirish</h2>
+    <p class="mt-3">{{ news.title }} — ushbu yangilikni o‘chirishga ishonchingiz komilmi?</p>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        <button type="submit" class="btn px-4 py-2"
+                style="background-color: #dc3545; color: #fff; border: none; border-radius: 6px;">
+            ✅ Ha, o‘chirish
+        </button>
+    </form>
+</div>
+{% endblock content %}

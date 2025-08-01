@@ -1,0 +1,212 @@
+{% load static %}
+
+<html class="no-js" lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{% block title %}{% endblock title %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Embedded CSS -->
+        <style>
+            body {
+                background-color: white;
+                font-family: 'Arial', sans-serif;
+            }
+
+            .btn-info {
+                background-color: #80dfff !important;
+                color: black !important;
+                border: none;
+                transition: 0.3s;
+            }
+
+            .btn-info:hover {
+                background-color: #3399ff !important;
+                color: white !important;
+            }
+
+            .header-top {
+                background-color: white !important;
+                border-bottom: 1px solid #ddd;
+                padding: 10px 0;
+            }
+
+            .footer-area {
+                background-color: #3399ff;
+                color: white;
+                padding: 60px 0;
+            }
+
+            .footer-area h3,
+            .footer-area h4,
+            .footer-area p,
+            .footer-area a {
+                color: white;
+            }
+
+            .footer-area img {
+                margin-right: 10px;
+                filter: brightness(0) invert(1);
+            }
+
+            .sticky-logo img {
+                height: 40px;
+            }
+
+            .footer-area p {
+                margin: 5px 0;
+            }
+
+            .header-logo-actions {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .header-logo-actions img {
+                height: 40px;
+            }
+
+            .header-logo-actions .btn {
+                margin-left: 20px;
+            }
+        </style>
+
+        <!-- CSS fayllar -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+
+    <header>
+        <div class="header-area">
+            <div class="main-header">
+                <div class="header-top d-none d-md-block">
+                    <div class="container">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-12 header-logo-actions">
+                                <img src="{% static 'image/logo.png' %}" alt="Logo" style="height: 80px; background-color: #e6f7ff; padding: 5px; border-radius: 5px;">
+                                {% if request.user.is_authenticated %}
+                                <a href="{% url 'create_page' %}"><h6 class="btn btn-info" style="background-color: lightblue; color: black;  margin-left: 760px;">Create plan</h6></a>
+                                <a href="{% url 'logout' %}"><h6 class="btn btn-info" style="background-color: lightblue; color: black;  margin-left: 30px;">Logout</h6></a>
+                                {% else %}
+                                <a href="{% url 'login' %}" class="btn btn-info" style="background-color: lightblue; color: black;  margin-left: 760px;">Login</a>
+                                <a href="{% url 'registration' %}" class="btn btn-info" style="background-color: lightblue; color: black;  margin-left: 30px;">Registration</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container mt-2">
+                        <div class="row align-items-center">
+                            <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
+                                <div class="sticky-logo">
+                                    <a href="/"><img src="{% static 'image/logo.png' %}" alt="Logo"></a>
+                                </div>
+                                <div class="main-menu d-none d-md-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a style="color:blue;" href="{% url 'not_done_planes' %}">Not done planes</a></li>
+                                            <li><a style="color:blue;" href="{% url 'done_planes' %}">Done planes</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-md-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock content %}
+
+    <footer>
+        <div class="footer-area">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="single-footer-caption">
+                            <h3>MyDay</h3>
+                            <p>MyDay - Bu uz kun tartibingizni tuzishingiz uchun zamonaviy platforma.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4">
+                        <div class="single-footer-caption">
+                            <h4>Bog‘lanish</h4>
+                            <p>Email: nsakura5472@gmail.com</p>
+                            <p>Tel: +998 77 025 71 76</p>
+                            <p>Manzil: Toshkent, O‘zbekiston</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                        <div class="single-footer-caption">
+                            <h4>Ijtimoiy Tarmoqlar</h4>
+                            <div>
+                                <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/2111/2111646.png" alt="Telegram"></a>
+                                <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733558.png" alt="Instagram"></a>
+                                <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733579.png" alt="Twitter"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-12 text-center">
+                        <p style="color: #e6f7ff;">&copy; 2025 MyDay. Barcha huquqlar himoyalangan. | Made by Mr_Madness</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS fayllar -->
+    <script src="{% static '/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="{% static '/js/vendor/jquery-1.12.4.min.js' %}"></script>
+        <script src="{% static '/js/popper.min.js' %}"></script>
+        <script src="{% static '/js/bootstrap.min.js' %}"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="{% static '/js/jquery.slicknav.min.js' %}"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="{% static '/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static '/js/slick.min.js' %}"></script>
+        <!-- Date Picker -->
+        <script src="{% static '/js/gijgo.min.js' %}"></script>
+		<!-- One Page, Animated-HeadLin -->
+        <script src="{% static '/js/wow.min.js' %}"></script>
+		<script src="{% static '/js/animated.headline.js' %}"></script>
+        <script src="{% static '/js/jquery.magnific-popup.js' %}"></script>
+
+        <!-- Breaking New Pluging -->
+        <script src="{% static '/js/jquery.ticker.js' %}"></script>
+        <script src="{% static '/js/site.js' %}"></script>
+
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="{% static '/js/jquery.scrollUp.min.js' %}"></script>
+        <script src="{% static '/js/jquery.nice-select.min.js' %}"></script>
+		<script src="{% static '/js/jquery.sticky.js' %}"></script>
+
+        <!-- contact js -->
+        <script src="{% static '/js/contact.js' %}"></script>
+        <script src="{% static '/js/jquery.form.js' %}"></script>
+        <script src="{% static '/js/jquery.validate.min.js' %}"></script>
+        <script src="{% static '/js/mail-script.js' %}"></script>
+        <script src="{% static '/js/jquery.ajaxchimp.min.js' %}"></script>
+
+		<!-- Jquery Plugins, main Jquery -->
+        <script src="{% static '/js/plugins.js' %}"></script>
+        <script src="{% static '/js/main.js' %}"></script>
+
+    </body>
+</html>
